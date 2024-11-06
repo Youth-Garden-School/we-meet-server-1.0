@@ -1,14 +1,9 @@
 package com.videocall.server.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-
-import java.util.UUID;
 
 @Entity
 @Getter
@@ -18,12 +13,15 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@Table(name = "Room")
 public class Room {
     @Id
-    @GeneratedValue
-    UUID id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "Id")
+    String id;
 
     @ManyToOne
+    @JoinColumn(name = "UserId", referencedColumnName = "id")
     @JsonIgnore
     User user;
 }
