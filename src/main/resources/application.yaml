@@ -7,11 +7,14 @@ spring:
   application:
     name: call-video
   datasource:
-    url: jdbc:mysql://localhost:3308/wemeet
+    url: jdbc:mysql://localhost:3306/WeMeet
     username: root
-    password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
+
+jwt:
+  access-signer-key: "731qf2xw4rt1ywo8wmg5l4ti59rmoddnixa427xhbsc0qwpgexta5mj4c8o0it55"
+  access-token-duration-in-seconds: 7200 # 2h (in seconds)

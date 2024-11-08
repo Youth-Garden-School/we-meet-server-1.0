@@ -9,6 +9,7 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -23,9 +24,9 @@ import java.util.List;
 
 @Configuration
 @RequiredArgsConstructor
+@EnableWebSecurity
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class SecurityConfig {
-    UserDetailsService userDetailsService;
 
     private static String[] PUBLIC_ENDPOINTS = {
             "/**"
@@ -41,34 +42,12 @@ public class SecurityConfig {
                                 .requestMatchers(PUBLIC_ENDPOINTS).permitAll()
                                 .anyRequest().authenticated()
                 )
-                .formLogin(
-                        form -> form
-                                .loginProcessingUrl("/login")
-                                .usernameParameter("username")
-                                .passwordParameter("password")
-                                .defaultSuccessUrl("http://localhost:3000/html/index.html", true) // Đường dẫn frontend sau khi đăng nhập thành công
-                                .permitAll()
-                )
-                .logout(
-                        log -> log.invalidateHttpSession(true)
-                                .clearAuthentication(true)
-                                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                                .permitAll()
-                )
                 .build();
     }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(11);
-    }
-
-    @Bean
-    public AuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-        authenticationProvider.setUserDetailsService(userDetailsService);
-        authenticationProvider.setPasswordEncoder(passwordEncoder());
-        return authenticationProvider;
     }
 
     @Bean
@@ -80,7 +59,8 @@ public class SecurityConfig {
                 "http://localhost:3001",
                 "https://localhost:3001",
                 "https://localhost:3000",
-                "https://backend-production-c2cb.up.railway.app"));
+                "https://backend-production-c2cb.up.railway.app",
+                "https://84rmcw5w-3000.asse.devtunnels.ms"));
 
         configuration.setAllowedMethods(List.of("*"));
         configuration.setAllowedHeaders(List.of("*"));

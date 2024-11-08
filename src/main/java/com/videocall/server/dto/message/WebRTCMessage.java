@@ -1,4 +1,4 @@
-package com.videocall.server.dto.request;
+package com.videocall.server.dto.message;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -8,6 +8,11 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class RoomRequest {
+public class WebRTCMessage {
+    String to;
+    String from;
+    String offer;
+    String answer;
+    String candidate;
     String roomId;
 }
