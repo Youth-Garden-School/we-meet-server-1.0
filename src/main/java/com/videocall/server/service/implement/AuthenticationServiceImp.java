@@ -1,6 +1,5 @@
 package com.videocall.server.service.implement;
 
-import com.videocall.server.mapper.UserMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +9,7 @@ import com.videocall.server.dto.response.AuthenticationResponse;
 import com.videocall.server.entity.User;
 import com.videocall.server.exception.AppException;
 import com.videocall.server.exception.ErrorCode;
+import com.videocall.server.mapper.UserMapper;
 import com.videocall.server.repository.UserRepository;
 import com.videocall.server.service.AuthenticationService;
 

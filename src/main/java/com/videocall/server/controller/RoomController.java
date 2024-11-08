@@ -3,7 +3,6 @@ package com.videocall.server.controller;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,6 +34,4 @@ public class RoomController {
                 .result(roomService.create())
                 .build();
     }
-
-
 }

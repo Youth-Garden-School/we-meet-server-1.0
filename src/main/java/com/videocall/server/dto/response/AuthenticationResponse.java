@@ -1,7 +1,5 @@
 package com.videocall.server.dto.response;
 
-import java.time.Instant;
-
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
