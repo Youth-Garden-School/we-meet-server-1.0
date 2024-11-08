@@ -1,9 +1,9 @@
 package com.videocall.server.repository;
 
-import com.videocall.server.entity.Room;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import com.videocall.server.entity.Room;
+
 @Repository
-public interface RoomRepository extends JpaRepository<Room, String> {
-}
+public interface RoomRepository extends JpaRepository<Room, String> {}

@@ -1,7 +1,9 @@
 package com.videocall.server.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 

@@ -1,5 +1,7 @@
 package com.videocall.server.service.implement;
 
+import org.springframework.stereotype.Service;
+
 import com.videocall.server.dto.response.RoomResponse;
 import com.videocall.server.entity.Room;
 import com.videocall.server.entity.User;
@@ -7,10 +9,10 @@ import com.videocall.server.repository.RoomRepository;
 import com.videocall.server.repository.UserRepository;
 import com.videocall.server.service.RoomService;
 import com.videocall.server.utils.UserUtils;
+
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
@@ -23,13 +25,7 @@ public class RoomServiceImp implements RoomService {
     public RoomResponse create() {
         String currentUserName = UserUtils.getCurrentUserName();
         User user = userRepository.findByUserName(currentUserName).get();
-        Room room = roomRepository.save(Room.builder()
-                .user(user)
-                .build());
-        return RoomResponse.builder()
-                .id(room.getId())
-                .build();
+        Room room = roomRepository.save(Room.builder().user(user).build());
+        return RoomResponse.builder().id(room.getId()).build();
     }
-
-
 }

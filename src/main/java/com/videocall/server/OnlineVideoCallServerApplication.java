@@ -9,5 +9,4 @@ public class OnlineVideoCallServerApplication {
     public static void main(String[] args) {
         SpringApplication.run(OnlineVideoCallServerApplication.class, args);
     }
-
 }

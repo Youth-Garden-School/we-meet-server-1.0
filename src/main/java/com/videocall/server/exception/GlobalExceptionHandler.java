@@ -3,7 +3,6 @@ package com.videocall.server.exception;
 import java.util.Map;
 import java.util.Objects;
 
-import com.videocall.server.dto.ApiResponse;
 import jakarta.validation.ConstraintViolation;
 
 import org.springframework.http.ResponseEntity;
@@ -12,6 +11,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import com.videocall.server.dto.ApiResponse;
 
 import lombok.extern.slf4j.Slf4j;
 

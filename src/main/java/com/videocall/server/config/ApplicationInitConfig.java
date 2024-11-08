@@ -1,19 +1,17 @@
 package com.videocall.server.config;
 
-import com.videocall.server.entity.User;
-import com.videocall.server.repository.UserRepository;
-import lombok.AccessLevel;
-import lombok.RequiredArgsConstructor;
-import lombok.experimental.FieldDefaults;
-import lombok.experimental.NonFinal;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.util.HashSet;
-import java.util.Set;
+import com.videocall.server.entity.User;
+import com.videocall.server.repository.UserRepository;
+
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
+import lombok.extern.slf4j.Slf4j;
 
 @Configuration
 @RequiredArgsConstructor
@@ -21,10 +19,8 @@ import java.util.Set;
 @Slf4j
 public class ApplicationInitConfig {
 
-
     @Bean
-    ApplicationRunner applicationRunner(
-            UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    ApplicationRunner applicationRunner(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         log.info("Init application");
 
         return args -> {

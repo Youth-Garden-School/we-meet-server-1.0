@@ -1,10 +1,9 @@
 package com.videocall.server.exception;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.experimental.FieldDefaults;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
+
+import lombok.Getter;
 
 @Getter
 public enum ErrorCode {
@@ -17,7 +16,7 @@ public enum ErrorCode {
     UNAUTHORIZED(1007, "Bạn không có quyền truy cập tài nguyên này", HttpStatus.FORBIDDEN),
     USER_NAME_IS_REQUIRED(1008, "Tên đăng nhập không được để trống", HttpStatus.BAD_REQUEST),
     PASSWORD_IS_REQUIRED(1009, "Mật khẩu không được để trống", HttpStatus.BAD_REQUEST),
-    PASSWORD_IS_NOT_CORRECT(1010, "Mật khẩu không ")
+    PASSWORD_IS_NOT_CORRECT(1010, "Mật khẩu không chính xác", HttpStatus.BAD_REQUEST),
     ;
 
     ErrorCode(int code, String message, HttpStatusCode statusCode) {
@@ -29,5 +28,4 @@ public enum ErrorCode {
     private final int code;
     private final String message;
     private final HttpStatusCode statusCode;
-
 }

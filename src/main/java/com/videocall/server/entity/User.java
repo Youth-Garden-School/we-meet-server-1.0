@@ -1,11 +1,11 @@
 package com.videocall.server.entity;
 
+import java.util.Set;
+
 import jakarta.persistence.*;
+
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-
-import java.util.Set;
-import java.util.UUID;
 
 @Entity
 @Getter
