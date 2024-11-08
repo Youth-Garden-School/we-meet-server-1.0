@@ -1,14 +1,15 @@
 server:
   port: 8080
   servlet:
-    context-path: /
+    context-path: /we-meet
 
 spring:
   application:
     name: call-video
   datasource:
-    url: jdbc:mysql://localhost:3306/WeMeet
+    url: jdbc:mysql://localhost:3308/wemeet
     username: root
+    password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:

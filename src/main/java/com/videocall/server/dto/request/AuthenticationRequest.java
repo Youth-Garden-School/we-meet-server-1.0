@@ -1,5 +1,6 @@
 package com.videocall.server.dto.request;
 
+import com.videocall.server.dto.response.UserResponse;
 import jakarta.validation.constraints.NotBlank;
 
 import lombok.*;
