@@ -37,9 +37,8 @@ public class UserServiceImp implements UserService {
 
     @Override
     public UserResponse myInfo() {
-        String userName = UserUtils.getCurrentUserName();
-        User user =
-                userRepository.findByUserName(userName).orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED));
+        String id = UserUtils.getCurrentUserName();
+        User user = userRepository.findById(id).orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED));
         return userMapper.toUserResponse(user);
     }
 }
