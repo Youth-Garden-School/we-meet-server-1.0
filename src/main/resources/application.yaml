@@ -7,7 +7,7 @@ spring:
   application:
     name: call-video
   datasource:
-    url: jdbc:mysql://localhost:3308/wemeet
+    url: jdbc:mysql://root:JIMyjqPThoRvJhEQHsGDlDzyFtnELOiR@junction.proxy.rlwy.net:40123/railway
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
