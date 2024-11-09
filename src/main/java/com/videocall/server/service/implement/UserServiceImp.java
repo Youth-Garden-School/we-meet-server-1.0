@@ -1,5 +1,6 @@
 package com.videocall.server.service.implement;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.videocall.server.config.JwtTokenProvider;
@@ -25,9 +26,11 @@ public class UserServiceImp implements UserService {
     UserRepository userRepository;
     UserMapper userMapper;
     JwtTokenProvider jwtTokenProvider;
+    PasswordEncoder passwordEncoder;
 
     @Override
     public AuthenticationResponse register(UserCreationRequest request) {
+        request.setPassword(passwordEncoder.encode(request.getPassword()));
         User user = userRepository.save(userMapper.toUser(request));
         return AuthenticationResponse.builder()
                 .accessToken(jwtTokenProvider.generateAccessToken(user))
