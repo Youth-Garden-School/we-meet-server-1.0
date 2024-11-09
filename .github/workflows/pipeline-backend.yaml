@@ -5,13 +5,13 @@ on:
     branches:
       - main
     paths:
-      - src/main/java/com/server/wordwaves/**
+      - src/main/java/com/videocall/server/**
       - Dockerfile
   pull_request:
     branches:
       - main
     paths:
-      - src/main/java/com/server/wordwaves/**
+      - src/main/java/com/videocall/server/**
       - Dockerfile
 
 jobs:
