@@ -25,6 +25,8 @@ public enum ErrorCode {
         this.statusCode = statusCode;
     }
 
+
+
     private final int code;
     private final String message;
     private final HttpStatusCode statusCode;
