@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -27,13 +28,13 @@ import lombok.experimental.FieldDefaults;
 public class SecurityConfig {
     CustomJwtDecoder customJwtDecoder;
 
-    private static String[] PUBLIC_ENDPOINTS = {"/**"};
+    private static String[] PUBLIC_ENDPOINTS = {"/auth/**", "/users"};
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf(AbstractHttpConfigurer::disable)
                 .cors(cor -> cor.configurationSource(corsConfigurationSource()))
-                .authorizeHttpRequests(author -> author.requestMatchers(PUBLIC_ENDPOINTS)
+                .authorizeHttpRequests(author -> author.requestMatchers(HttpMethod.POST, PUBLIC_ENDPOINTS)
                         .permitAll()
                         .anyRequest()
                         .authenticated())

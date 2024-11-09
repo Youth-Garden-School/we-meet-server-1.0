@@ -1,13 +1,11 @@
 package com.videocall.server.controller;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.videocall.server.dto.ApiResponse;
 import com.videocall.server.dto.request.UserCreationRequest;
 import com.videocall.server.dto.response.AuthenticationResponse;
+import com.videocall.server.dto.response.UserResponse;
 import com.videocall.server.service.UserService;
 
 import lombok.AccessLevel;
@@ -28,6 +26,14 @@ public class UserController {
         return ApiResponse.<AuthenticationResponse>builder()
                 .message("Đăng ký")
                 .result(userService.register(request))
+                .build();
+    }
+
+    @GetMapping("/my-info")
+    ApiResponse<UserResponse> myInfo() {
+        return ApiResponse.<UserResponse>builder()
+                .message("Lấy thông tin người dùng")
+                .result(userService.myInfo())
                 .build();
     }
 }

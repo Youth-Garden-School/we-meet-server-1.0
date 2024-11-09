@@ -5,10 +5,14 @@ import org.springframework.stereotype.Service;
 import com.videocall.server.config.JwtTokenProvider;
 import com.videocall.server.dto.request.UserCreationRequest;
 import com.videocall.server.dto.response.AuthenticationResponse;
+import com.videocall.server.dto.response.UserResponse;
 import com.videocall.server.entity.User;
+import com.videocall.server.exception.AppException;
+import com.videocall.server.exception.ErrorCode;
 import com.videocall.server.mapper.UserMapper;
 import com.videocall.server.repository.UserRepository;
 import com.videocall.server.service.UserService;
+import com.videocall.server.utils.UserUtils;
 
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -29,5 +33,13 @@ public class UserServiceImp implements UserService {
                 .accessToken(jwtTokenProvider.generateAccessToken(user))
                 .user(userMapper.toUserResponse(user))
                 .build();
+    }
+
+    @Override
+    public UserResponse myInfo() {
+        String userName = UserUtils.getCurrentUserName();
+        User user =
+                userRepository.findByUserName(userName).orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED));
+        return userMapper.toUserResponse(user);
     }
 }
