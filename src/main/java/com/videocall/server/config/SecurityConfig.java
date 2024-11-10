@@ -65,6 +65,9 @@ public class SecurityConfig {
         return jwtAuthenticationConverter;
     }
 
+
+
+
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
