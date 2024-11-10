@@ -18,8 +18,7 @@ public enum ErrorCode {
     PASSWORD_IS_REQUIRED(1009, "Mật khẩu không được để trống", HttpStatus.BAD_REQUEST),
     PASSWORD_IS_NOT_CORRECT(1010, "Mật khẩu không chính xác", HttpStatus.BAD_REQUEST),
 
-
-    //ROOM
+    // ROOM
     ROOM_NOT_EXISTED(2001, "Phòng không tồn tại", HttpStatus.BAD_REQUEST),
     ;
 
@@ -28,8 +27,6 @@ public enum ErrorCode {
         this.message = message;
         this.statusCode = statusCode;
     }
-
-
 
     private final int code;
     private final String message;

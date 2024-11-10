@@ -1,14 +1,13 @@
 package com.videocall.server.entity;
 
+import java.security.SecureRandom;
+
 import jakarta.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-
-import java.security.SecureRandom;
-import java.util.UUID;
 
 @Entity
 @Getter
