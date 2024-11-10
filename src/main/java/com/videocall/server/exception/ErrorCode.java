@@ -17,6 +17,10 @@ public enum ErrorCode {
     USER_NAME_IS_REQUIRED(1008, "Tên đăng nhập không được để trống", HttpStatus.BAD_REQUEST),
     PASSWORD_IS_REQUIRED(1009, "Mật khẩu không được để trống", HttpStatus.BAD_REQUEST),
     PASSWORD_IS_NOT_CORRECT(1010, "Mật khẩu không chính xác", HttpStatus.BAD_REQUEST),
+
+
+    //ROOM
+    ROOM_NOT_EXISTED(2001, "Phòng không tồn tại", HttpStatus.BAD_REQUEST),
     ;
 
     ErrorCode(int code, String message, HttpStatusCode statusCode) {

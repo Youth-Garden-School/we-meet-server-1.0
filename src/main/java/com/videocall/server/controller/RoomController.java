@@ -3,6 +3,8 @@ package com.videocall.server.controller;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
+import com.videocall.server.exception.AppException;
+import com.videocall.server.exception.ErrorCode;
 import org.json.JSONObject;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -44,6 +46,9 @@ public class RoomController {
         JSONObject jsonObject = new JSONObject(join);
         String roomId = jsonObject.getString("roomId");
         String userId = jsonObject.getString("userId");
+
+        Boolean isExist = roomService.exist(roomId);
+        if(!isExist) throw new AppException(ErrorCode.ROOM_NOT_EXISTED);
 
         rooms.computeIfAbsent(roomId, s -> new HashSet<>()).add(userId);
         Set<String> roomUsers = rooms.get(roomId);

@@ -31,5 +31,10 @@ public class RoomServiceImp implements RoomService {
         return RoomResponse.builder().id(room.getId()).build();
     }
 
+    @Override
+    public Boolean exist(String roomId) {
+        return roomRepository.existsById(roomId);
+    }
+
 
 }
