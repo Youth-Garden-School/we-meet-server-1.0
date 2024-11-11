@@ -57,7 +57,7 @@ public class RoomController {
 
         for (String existingUserId : roomUsers) {
             if (!existingUserId.equals(userId)) {
-                simpMessagingTemplate.convertAndSendToUser(existingUserId, "/topic/call", userId);
+                simpMessagingTemplate.convertAndSendToUser(existingUserId, "/topic/call", join);
                 log.info("Call sent to user: {}", existingUserId);
             }
         }
@@ -72,7 +72,7 @@ public class RoomController {
                 jsonObject.get("callTo").getClass(),
                 jsonObject.get("callFrom").getClass());
         simpMessagingTemplate.convertAndSendToUser(
-                jsonObject.getString("callTo"), "/topic/call", jsonObject.get("callFrom"));
+                jsonObject.getString("callTo"), "/topic/call", call);
     }
 
     @MessageMapping("/offer")
