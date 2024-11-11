@@ -107,4 +107,81 @@ public class RoomController {
         simpMessagingTemplate.convertAndSendToUser(jsonObject.getString("toUser"), "/topic/candidate", candidate);
         log.info("Candidate sent");
     }
+
+    @MessageMapping("/leave")
+    public void leave(String leave) {
+        JSONObject jsonObject = new JSONObject(leave);
+        String roomId = jsonObject.getString("roomId");
+        String userId = jsonObject.getString("userId");
+
+        if (!roomService.exist(roomId)) throw new SocketException(ErrorCode.ROOM_NOT_EXISTED, userId);
+
+        Set<String> roomUsers = rooms.get(roomId);
+        if (roomUsers != null) {
+            roomUsers.remove(userId);
+
+            if (roomUsers.isEmpty()) {
+                rooms.remove(roomId);
+                log.info("Room {} has been removed because it's empty", roomId);
+            } else {
+                log.info("User {} left room {}. Remaining users: {}", userId, roomId, roomUsers);
+
+                for (String existingUserId : roomUsers) {
+                    simpMessagingTemplate.convertAndSendToUser(existingUserId, "/topic/leave", leave);
+                    log.info("Leave notification sent to user: {}", existingUserId);
+                }
+            }
+        } else {
+            log.warn("Room {} ko tồn tại hoặc đã bị xóa", roomId);
+        }
+    }
+
+    @MessageMapping("/videoToggle")
+    public void handleVideoToggle(String message) {
+        JSONObject jsonObject = new JSONObject(message);
+        String userId = jsonObject.getString("userId");
+        boolean isVideoMuted = jsonObject.getBoolean("isVideoMuted");
+        String roomId = jsonObject.getString("roomId");
+
+        log.info("Nhận videoToggle từ người dùng {} trong phòng {}: video {}",
+                userId, roomId, isVideoMuted ? "tắt" : "bật");
+
+        for (String participantId : getRoomParticipants(roomId)) {
+            if (!participantId.equals(userId)) { // Không gửi cho người đã tắt/bật camera
+                simpMessagingTemplate.convertAndSendToUser(
+                        participantId,
+                        "/topic/videoToggle",
+                        message
+                );
+            }
+        }
+    }
+
+    @MessageMapping("/audioToggle")
+    public void handleAudioToggle(String message) {
+        JSONObject jsonObject = new JSONObject(message);
+        String userId = jsonObject.getString("userId");
+        boolean isMuted = jsonObject.getBoolean("isMuted");
+        String roomId = jsonObject.getString("roomId");
+
+        log.info("Nhận audioToggle từ người dùng {} trong phòng {}: mic {}",
+                userId, roomId, isMuted ? "tắt" : "bật");
+
+        for (String participantId : getRoomParticipants(roomId)) {
+            if (!participantId.equals(userId)) {
+                simpMessagingTemplate.convertAndSendToUser(
+                        participantId,
+                        "/topic/audioToggle",
+                        message
+                );
+                log.info("Đã gửi thông báo audioToggle đến người dùng {}", participantId);
+            }
+        }
+    }
+
+
+    private Set<String> getRoomParticipants(String roomId) {
+        return rooms.getOrDefault(roomId, new HashSet<>());
+    }
+
 }
