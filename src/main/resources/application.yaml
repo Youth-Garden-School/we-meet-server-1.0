@@ -7,9 +7,9 @@ spring:
   application:
     name: call-video
   datasource:
-    url: jdbc:mysql://root:JIMyjqPThoRvJhEQHsGDlDzyFtnELOiR@junction.proxy.rlwy.net:40123/railway
-    username: root
-    password: root
+    url: <your-db-url>
+    username: 
+    password: 
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
